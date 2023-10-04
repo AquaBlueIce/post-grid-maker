@@ -7,178 +7,59 @@
     android:background="@color/black"
     tools:context=".MainActivity">
 
-    <!--    app:src="@drawable/mon"-->
 
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginBottom="280dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Button
-        android:id="@+id/btntwobox"
+    <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2B"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="113dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="73dp"
+        android:fontFamily="@font/chawp"
+        android:text="Post"
+        android:textColor="#FFF"
+        android:textSize="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/adView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.691" />
+        app:layout_constraintTop_toBottomOf="@+id/adView"
+        app:layout_constraintVertical_bias="0.002" />
 
-    <Button
-        android:id="@+id/btnTwoHorizontal"
+    <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="2H"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="66dp"
+        android:layout_marginEnd="164dp"
+        android:fontFamily="@font/chawp"
+        android:text="Grid"
+        android:textColor="#FFF"
+        android:textSize="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/adView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnTwoVertical"
-        app:layout_constraintVertical_bias="0.02" />
+        app:layout_constraintTop_toBottomOf="@+id/adView"
+        app:layout_constraintVertical_bias="0.297" />
 
-    <Button
-        android:id="@+id/btnThreeBox"
+    <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="3B"
-
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="82dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="232dp"
+        android:fontFamily="@font/chawp"
+        android:text="Maker"
+        android:textColor="#FFF"
+        android:textSize="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/adView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btntwobox"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.691" />
-
-    <Button
-        android:id="@+id/btnOneVerticalTwoBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1V2B"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.321"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnThreeBox"
-        app:layout_constraintVertical_bias="0.012" />
-
-    <Button
-        android:id="@+id/btnOneHorizontalTwoBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="1H2B"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.321"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnOneVerticalTwoBox"
-        app:layout_constraintVertical_bias="0.017" />
-
-    <Button
-        android:id="@+id/btnFourBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="4B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnThreeBox"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.691" />
-
-    <Button
-        android:id="@+id/btnOneVThreeB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="1V3B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnOneVerticalTwoBox"
-        app:layout_constraintTop_toBottomOf="@+id/btnFourBox"
-        app:layout_constraintVertical_bias="0.012" />
-
-    <Button
-        android:id="@+id/btnOneHThreeB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="1H3B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnOneHorizontalTwoBox"
-        app:layout_constraintTop_toBottomOf="@+id/btnOneVThreeB"
-        app:layout_constraintVertical_bias="0.017" />
-
-    <Button
-        android:id="@+id/btnFiveB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginEnd="16dp"
-        android:text="5B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnFourBox"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.691" />
-
-    <Button
-        android:id="@+id/btnTwoHThreeB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginEnd="16dp"
-        android:text="2H3B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnOneVThreeB"
-        app:layout_constraintTop_toBottomOf="@+id/btnFiveB"
-        app:layout_constraintVertical_bias="0.012" />
-
-    <Button
-        android:id="@+id/btnTwoBThreeH"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginEnd="16dp"
-        android:text="2B3H"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnOneHThreeB"
-        app:layout_constraintTop_toBottomOf="@+id/btnTwoHThreeB"
-        app:layout_constraintVertical_bias="0.017" />
-
-    <Button
-        android:id="@+id/btnTwoVertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="2V"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.012"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btntwobox"
-        app:layout_constraintVertical_bias="0.012" />
-
-    <!--  four  -->
-
-    <!--    Five-->
+        app:layout_constraintTop_toBottomOf="@+id/adView"
+        app:layout_constraintVertical_bias="0.929" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -204,5 +85,50 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
+
+    <Button
+        android:id="@+id/btnFacebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="156dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:fontFamily="@font/chawp"
+        android:text="Facebook"
+        android:textColor="#FFF"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/adView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnInstagram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:fontFamily="@font/chawp"
+        android:text="Instagram"
+        android:textColor="#FFF"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/adView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnCredits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:fontFamily="@font/chawp"
+        android:text="Credits"
+        android:textColor="#FFF"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/adView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

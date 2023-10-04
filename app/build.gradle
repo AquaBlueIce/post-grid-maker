@@ -2,18 +2,38 @@ plugins {
     id 'com.android.application'
 }
 
+//def versionPropertiesFile = file('version.properties')
+//
+//def appVersionCode = 1
+//def appVersionName = "1.0"
+
 android {
     namespace 'com.aquablueice.postgridmaker'
     compileSdk 33
+
+
+//    Properties props = new Properties()
+//    if (versionPropertiesFile.exists()) {
+//        versionPropertiesFile.withInputStream {
+//            props.load(it)
+//        }
+//        appVersionCode = Integer.parseInt(props['versionCode'])
+//        appVersionName = props['versionName']
+//    }
+
+
 
     defaultConfig {
         applicationId "com.aquablueice.postgridmaker"
         minSdk 24
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName '1.4.0'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
     }
 
     buildTypes {
@@ -21,6 +41,18 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+//        android.applicationVariants.all { variant ->
+//            if (variant.buildType.name == 'release') {
+//                variant.getAssembleProvider().configure() {
+//                    dependsOn incrementVersion
+//                }
+//            }
+//        }
+
+
+
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -44,3 +76,43 @@ dependencies {
 
     implementation("com.vanniktech:android-image-cropper:4.5.0")
 }
+
+//
+//task readVersionProperties {
+//    doLast {
+//        Properties props = new Properties()
+//        if (versionPropertiesFile.exists()) {
+//            versionPropertiesFile.withInputStream {
+//                props.load(it)
+//            }
+//            appVersionCode = Integer.parseInt(props['versionCode'])
+//            appVersionName = props['versionName']
+//        }
+//        println "Loaded versionCode=$appVersionCode and versionName=$appVersionName"
+//    }
+//}
+//
+//task incrementVersion(dependsOn: readVersionProperties) {
+//    doLast {
+//        appVersionCode += 1
+//        appVersionName = getNextVersionName(appVersionName)
+//        Properties props = new Properties()
+//        props.setProperty('versionCode', appVersionCode.toString())
+//        props.setProperty('versionName', appVersionName)
+//        versionPropertiesFile.withOutputStream {
+//            props.store(it, null)
+//        }
+//        println "Updated versionCode to $appVersionCode and versionName to $appVersionName"
+//    }
+//}
+//
+//static def getNextVersionName(currentVersionName) {
+//    def versionNumber = currentVersionName.tokenize('.').last().toInteger()
+//    def versionMajor = currentVersionName.tokenize('.').first().toInteger()
+//
+//    if (versionNumber < 9) {
+//        return "${versionMajor}.${versionNumber + 1}"
+//    } else {
+//        return "${versionMajor + 1}.0"
+//    }
+//}

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,10 +15,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PostGridMaker"
         tools:targetApi="31">
+        <activity
+            android:name=".Instagram"
+            android:exported="false" />
+        <activity
+            android:name=".Credits"
+            android:exported="false" />
+        <activity
+            android:name=".yee"
+            android:exported="false" />
+        <activity
+            android:name=".Facebook"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9355567583382018~4873727815"/>
+            android:value="ca-app-pub-9355567583382018~4873727815" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -28,9 +41,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.yalantis.ucrop.UCropActivity"/>
-<!--        <activity android:name="com.google.android.gms.example.appopendemo.MainActivity"-->
+        <activity android:name="com.yalantis.ucrop.UCropActivity" />
     </application>
 
 </manifest>
