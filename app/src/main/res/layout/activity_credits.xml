@@ -31,7 +31,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/chawp"
-        android:text="Post Grid Maker \n Created By AquaBlueIce \n \n v1.3.0"
+        android:text="Post Grid Maker \n Created By AquaBlueIce \n\n One week planning \n And Three days coding \n\n\n\n\n\n\n\n\n Icon created by amanda miranda\n\n v1.5.0"
         android:textColor="#fff"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"

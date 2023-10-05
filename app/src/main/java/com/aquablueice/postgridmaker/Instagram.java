@@ -35,7 +35,7 @@ import java.util.List;
 public class Instagram extends AppCompatActivity {
     public AdView mAdView, addview;
     Uri uri;
-    Button btn21, btn22, btn23, btn31, btn32, btn33, btn34;
+    Button btn12, btn13,btn21, btn22, btn23, btn31, btn32, btn33, btn34, btn35;
     ImageView imageView;
     String grid;
     @Override
@@ -43,6 +43,9 @@ public class Instagram extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instagram);
 
+
+        btn12 = (Button) findViewById(R.id.btnOneTwo);
+        btn13 = (Button) findViewById(R.id.btnOneThree);
         btn21 = (Button) findViewById(R.id.btnTwoOne);
         btn22 = (Button) findViewById(R.id.btnTwoTwo);
         btn23 = (Button) findViewById(R.id.btnTwoThree);
@@ -50,6 +53,7 @@ public class Instagram extends AppCompatActivity {
         btn32 = (Button) findViewById(R.id.btnThreeTwo);
         btn33 = (Button) findViewById(R.id.btnThreeThree);
         btn34 = (Button) findViewById(R.id.btnThreeFour);
+        btn35 = (Button) findViewById(R.id.btnThreeFive);
         imageView = findViewById(R.id.imageView);
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -68,6 +72,28 @@ public class Instagram extends AppCompatActivity {
 
 
 
+
+        btn12.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImagePicker.with(Instagram.this)
+                        .galleryOnly()
+                        .crop(1,2)
+                        .start();
+                grid = "12";
+            }
+        });
+
+        btn13.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImagePicker.with(Instagram.this)
+                        .galleryOnly()
+                        .crop(1,3)
+                        .start();
+                grid = "13";
+            }
+        });
         btn21.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -144,6 +170,17 @@ public class Instagram extends AppCompatActivity {
                 grid = "34";
             }
         });
+
+        btn35.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImagePicker.with(Instagram.this)
+                        .galleryOnly()
+                        .crop(3,5)
+                        .start();
+                grid = "35";
+            }
+        });
     }
 
     @Override
@@ -171,6 +208,12 @@ public class Instagram extends AppCompatActivity {
     public  void startCutting(Bitmap bitmap){
         List<Bitmap> bitmapList = new ArrayList<Bitmap>();
         switch (grid) {
+            case "12":
+                bitmapList = oneTwo(bitmap);
+                break;
+            case "13":
+                bitmapList = oneThree(bitmap);
+                break;
             case "21":
                 bitmapList = twoOne(bitmap);
                 break;
@@ -192,6 +235,9 @@ public class Instagram extends AppCompatActivity {
             case "34":
                 bitmapList = threeFour(bitmap);
                 break;
+            case "35":
+                bitmapList = threeFive(bitmap);
+                break;
         }
 
         for (int i = 0; i < bitmapList.size();i++){
@@ -199,6 +245,28 @@ public class Instagram extends AppCompatActivity {
             saveImage(bitmapList.get(i),count);
         }
     }
+
+
+    public List<Bitmap> oneTwo(Bitmap picture) {
+        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth(), picture.getHeight()/2);
+        imgs.add(first);
+        Bitmap second= Bitmap.createBitmap(picture, 0, picture.getHeight()/2, picture.getWidth(), picture.getHeight()/2);
+        imgs.add(second);
+        return imgs;
+    }
+
+    public List<Bitmap> oneThree(Bitmap picture) {
+        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth(), picture.getHeight()/3);
+        imgs.add(first);
+        Bitmap second= Bitmap.createBitmap(picture, 0, picture.getHeight()/3, picture.getWidth(), picture.getHeight()/3);
+        imgs.add(second);
+        Bitmap third= Bitmap.createBitmap(picture, 0, (picture.getHeight()/3)*2, picture.getWidth(), picture.getHeight()/3);
+        imgs.add(third);
+        return imgs;
+    }
+
 
     public List<Bitmap> twoOne(Bitmap picture) {
         List<Bitmap> imgs = new ArrayList<Bitmap>();
@@ -299,9 +367,9 @@ public class Instagram extends AppCompatActivity {
         imgs.add(third);
         Bitmap forth = Bitmap.createBitmap(picture, 0, picture.getHeight()/4, picture.getWidth()/3, picture.getHeight()/4);
         imgs.add(forth);
-        Bitmap fifth= Bitmap.createBitmap(picture, picture.getWidth()/4, picture.getHeight()/3, picture.getWidth()/3, picture.getHeight()/4);
+        Bitmap fifth= Bitmap.createBitmap(picture, picture.getWidth()/3, picture.getHeight()/4, picture.getWidth()/3, picture.getHeight()/4);
         imgs.add(fifth);
-        Bitmap sixth= Bitmap.createBitmap(picture, (picture.getWidth()/4)*2, picture.getHeight()/3, picture.getWidth()/3, picture.getHeight()/4);
+        Bitmap sixth= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, picture.getHeight()/4, picture.getWidth()/3, picture.getHeight()/4);
         imgs.add(sixth);
         Bitmap seven = Bitmap.createBitmap(picture, 0, (picture.getHeight()/4)*2, picture.getWidth()/3, picture.getHeight()/4);
         imgs.add(seven);
@@ -315,6 +383,41 @@ public class Instagram extends AppCompatActivity {
         imgs.add(eleven);
         Bitmap twelve= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, (picture.getHeight()/4)*3, picture.getWidth()/3, picture.getHeight()/4);
         imgs.add(twelve);
+        return imgs;
+    }
+
+    public List<Bitmap> threeFive(Bitmap picture) {
+        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth()/3, picture.getHeight()/5);
+        imgs.add(first);
+        Bitmap second= Bitmap.createBitmap(picture, picture.getWidth()/3, 0, picture.getWidth()/3, picture.getHeight()/5);
+        imgs.add(second);
+        Bitmap third= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, 0, picture.getWidth()/3, picture.getHeight()/5);
+        imgs.add(third);
+        Bitmap forth = Bitmap.createBitmap(picture, 0, picture.getHeight()/5, picture.getWidth()/3, picture.getHeight()/5);
+        imgs.add(forth);
+        Bitmap fifth= Bitmap.createBitmap(picture, picture.getWidth()/3, picture.getHeight()/5, picture.getWidth()/3, picture.getHeight()/5);
+        imgs.add(fifth);
+        Bitmap sixth= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, picture.getHeight()/5, picture.getWidth()/3, picture.getHeight()/5);
+        imgs.add(sixth);
+        Bitmap seven = Bitmap.createBitmap(picture, 0, (picture.getHeight()/5)*2, picture.getWidth()/3, picture.getHeight()/5);
+        imgs.add(seven);
+        Bitmap eight= Bitmap.createBitmap(picture, picture.getWidth()/3, (picture.getHeight()/5)*2, picture.getWidth()/3, picture.getHeight()/5);
+        imgs.add(eight);
+        Bitmap nine= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, (picture.getHeight()/5)*2, picture.getWidth()/3, picture.getHeight()/5);
+        imgs.add(nine);
+        Bitmap ten = Bitmap.createBitmap(picture, 0, (picture.getHeight()/5)*3, picture.getWidth()/3, picture.getHeight()/5);
+        imgs.add(ten);
+        Bitmap eleven= Bitmap.createBitmap(picture, picture.getWidth()/3, (picture.getHeight()/5)*3, picture.getWidth()/3, picture.getHeight()/5);
+        imgs.add(eleven);
+        Bitmap twelve= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, (picture.getHeight()/5)*3, picture.getWidth()/3, picture.getHeight()/5);
+        imgs.add(twelve);
+        Bitmap thirteen = Bitmap.createBitmap(picture, 0, (picture.getHeight()/5)*4, picture.getWidth()/3, picture.getHeight()/5);
+        imgs.add(thirteen);
+        Bitmap fourteen= Bitmap.createBitmap(picture, picture.getWidth()/3, (picture.getHeight()/5)*4, picture.getWidth()/3, picture.getHeight()/5);
+        imgs.add(fourteen);
+        Bitmap fifteen= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, (picture.getHeight()/5)*4, picture.getWidth()/3, picture.getHeight()/5);
+        imgs.add(fifteen);
         return imgs;
     }
 

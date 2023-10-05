@@ -13,7 +13,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="113dp"
-        android:layout_marginTop="39dp"
         android:layout_marginEnd="73dp"
         android:fontFamily="@font/chawp"
         android:text="Post"
@@ -23,8 +22,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adView"
-        app:layout_constraintVertical_bias="0.002" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.143" />
 
     <TextView
         android:id="@+id/title"
@@ -36,12 +35,12 @@
         android:text="Grid"
         android:textColor="#FFF"
         android:textSize="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/adView2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adView"
-        app:layout_constraintVertical_bias="0.297" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.322" />
 
     <TextView
         android:id="@+id/title"
@@ -49,17 +48,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="82dp"
         android:layout_marginEnd="31dp"
-        android:layout_marginBottom="232dp"
         android:fontFamily="@font/chawp"
         android:text="Maker"
         android:textColor="#FFF"
         android:textSize="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/adView2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adView"
-        app:layout_constraintVertical_bias="0.929" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.523" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
