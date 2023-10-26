@@ -8,7 +8,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -35,7 +35,7 @@ import java.util.List;
 public class Instagram extends AppCompatActivity {
     public AdView mAdView, addview;
     Uri uri;
-    Button btn12, btn13,btn21, btn22, btn23, btn31, btn32, btn33, btn34, btn35;
+    ImageButton btn12, btn13,btn21, btn22, btn23, btn31, btn32, btn33, btn34, btn35;
     ImageView imageView;
     String grid;
     @Override
@@ -44,16 +44,16 @@ public class Instagram extends AppCompatActivity {
         setContentView(R.layout.activity_instagram);
 
 
-        btn12 = (Button) findViewById(R.id.btnOneTwo);
-        btn13 = (Button) findViewById(R.id.btnOneThree);
-        btn21 = (Button) findViewById(R.id.btnTwoOne);
-        btn22 = (Button) findViewById(R.id.btnTwoTwo);
-        btn23 = (Button) findViewById(R.id.btnTwoThree);
-        btn31 = (Button) findViewById(R.id.btnThreeOne);
-        btn32 = (Button) findViewById(R.id.btnThreeTwo);
-        btn33 = (Button) findViewById(R.id.btnThreeThree);
-        btn34 = (Button) findViewById(R.id.btnThreeFour);
-        btn35 = (Button) findViewById(R.id.btnThreeFive);
+        btn12 = (ImageButton) findViewById(R.id.btnOneTwo);
+        btn13 = (ImageButton) findViewById(R.id.btnOneThree);
+        btn21 = (ImageButton) findViewById(R.id.btnTwoOne);
+        btn22 = (ImageButton) findViewById(R.id.btnTwoTwo);
+        btn23 = (ImageButton) findViewById(R.id.btnTwoThree);
+        btn31 = (ImageButton) findViewById(R.id.btnThreeOne);
+        btn32 = (ImageButton) findViewById(R.id.btnThreeTwo);
+        btn33 = (ImageButton) findViewById(R.id.btnThreeThree);
+        btn34 = (ImageButton) findViewById(R.id.btnThreeFour);
+        btn35 = (ImageButton) findViewById(R.id.btnThreeFive);
         imageView = findViewById(R.id.imageView);
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {

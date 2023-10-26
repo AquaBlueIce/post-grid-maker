@@ -12,7 +12,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -39,7 +39,7 @@ import java.util.List;
 public class Facebook extends AppCompatActivity {
 
     ImageView imageView;
-    Button btn2box, btn2V, btn2H, btn3B, btn1V2B, btn1H2B, btn4B,btn1V3B, btn1H3B, btn5B, btn2H3B, btn2B3H;
+    ImageButton btn2box, btn2V, btn2H, btn1V2B, btn1H2B, btn4B,btn1V3B, btn1H3B, btn5B, btn2H3B, btn2B3H;
     String grid;
     Uri uri;
     public AdView mAdView, addview;
@@ -50,18 +50,16 @@ public class Facebook extends AppCompatActivity {
         setContentView(R.layout.activity_facebook);
 
         imageView = findViewById(R.id.imageView);
-        btn2box = findViewById(R.id.btntwobox);
-        btn2V = findViewById(R.id.btnTwoVertical);
-        btn2H = findViewById(R.id.btnTwoHorizontal);
-//        btn3B = findViewById(R.id.btnThreeBox);
-        btn1V2B = findViewById(R.id.btnOneVerticalTwoBox);
-        btn1H2B = findViewById(R.id.btnOneHorizontalTwoBox);
-        btn4B = findViewById(R.id.btnFourBox);
-        btn1V3B = findViewById(R.id.btnOneVThreeB);
-        btn1H3B = findViewById(R.id.btnOneHThreeB);
-        btn5B = findViewById(R.id.btnFiveB);
-        btn2H3B = findViewById(R.id.btnTwoHThreeB);
-        btn2B3H = findViewById(R.id.btnTwoBThreeH);
+        btn2box = (ImageButton) findViewById(R.id.btntwobox);
+        btn2V   = (ImageButton) findViewById(R.id.btnTwoVertical);
+        btn2H   = (ImageButton) findViewById(R.id.btnTwoHorizontal);
+        btn1V2B = (ImageButton) findViewById(R.id.btnOneVerticalTwoBox);
+        btn1H2B = (ImageButton) findViewById(R.id.btnOneHorizontalTwoBox);
+        btn4B   = (ImageButton) findViewById(R.id.btnFourBox);
+        btn1V3B = (ImageButton) findViewById(R.id.btnOneVThreeB);
+        btn1H3B = (ImageButton) findViewById(R.id.btnOneHThreeB);
+        btn5B   = (ImageButton) findViewById(R.id.btnFiveB);
+        btn2B3H = (ImageButton) findViewById(R.id.btnTwoBThreeH);
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -110,16 +108,6 @@ public class Facebook extends AppCompatActivity {
                 grid = "2H";
             }
         });
-//        btn3B.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ImagePicker.with(MainActivity.this)
-//                         .galleryOnly()
-//                         .crop(3,1)
-//                         .start();
-//                grid = "3B";
-//            }
-//        });
         btn1V2B.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -186,16 +174,6 @@ public class Facebook extends AppCompatActivity {
             }
         });
 
-        btn2H3B.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ImagePicker.with(Facebook.this)
-                        .galleryOnly()
-                        .crop(1,1)
-                        .start();
-                grid = "2H3B";
-            }
-        });
 
         btn2B3H.setOnClickListener(new View.OnClickListener() {
             @Override

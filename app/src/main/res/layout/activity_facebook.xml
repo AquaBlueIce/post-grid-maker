@@ -22,162 +22,111 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adView" />
 
-    <Button
-        android:id="@+id/btntwobox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="2B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.734" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="333dp"
-        android:layout_marginBottom="228dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="4dp" />
-
-    <Button
-        android:id="@+id/btnOneVerticalTwoBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="1V2B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.321"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.734" />
+        app:layout_constraintVertical_bias="0.366"
+        tools:layout_editor_absoluteX="0dp" />
 
-    <Button
-        android:id="@+id/btnOneHorizontalTwoBox"
-        android:layout_width="wrap_content"
+    <HorizontalScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="1H2B"
+        app:layout_constraintBottom_toTopOf="@+id/adView2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        tools:layout_editor_absoluteX="-16dp">
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.321"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnOneVerticalTwoBox"
-        app:layout_constraintVertical_bias="0.022" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="5dp">
 
-    <Button
-        android:id="@+id/btnFourBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            <ImageButton
+                android:id="@+id/btntwobox"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/twob"
+                android:background="@color/white"
+                android:layout_marginRight="5dp" />
 
-        android:layout_marginEnd="128dp"
-        android:text="4B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.737" />
+            <ImageButton
+                android:id="@+id/btnTwoVertical"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/twov"
+                android:background="@color/white"
+                android:layout_marginRight="5dp"/>
 
-    <Button
-        android:id="@+id/btnOneVThreeB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            <ImageButton
+                android:id="@+id/btnTwoHorizontal"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/twoh"
+                android:background="@color/white"
+                android:layout_marginRight="5dp" />
 
-        android:text="1V3B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnOneVerticalTwoBox"
-        app:layout_constraintTop_toBottomOf="@+id/btnFourBox"
-        app:layout_constraintVertical_bias="0.007" />
+            <ImageButton
+                android:id="@+id/btnOneVerticalTwoBox"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/onevtwob"
+                android:background="@color/white"
+                android:layout_marginRight="5dp" />
 
-    <Button
-        android:id="@+id/btnOneHThreeB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            <ImageButton
+                android:id="@+id/btnOneHorizontalTwoBox"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/onehtwob"
+                android:background="@color/white"
+                android:layout_marginRight="5dp"/>
 
-        android:text="1H3B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnOneHorizontalTwoBox"
-        app:layout_constraintTop_toBottomOf="@+id/btnOneVThreeB"
-        app:layout_constraintVertical_bias="0.0" />
+            <ImageButton
+                android:id="@+id/btnFourBox"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/fourb"
+                android:background="@color/white"
+                android:layout_marginRight="5dp"/>
 
-    <Button
-        android:id="@+id/btnFiveB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            <ImageButton
+                android:id="@+id/btnOneVThreeB"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/onevthreeb"
+                android:background="@color/white"
+                android:layout_marginRight="5dp"/>
 
-        android:layout_marginEnd="16dp"
-        android:text="5B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnFourBox"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.734" />
+            <ImageButton
+                android:id="@+id/btnOneHThreeB"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/onehthreeb"
+                android:background="@color/white"
+                android:layout_marginRight="5dp"/>
 
-    <Button
-        android:id="@+id/btnTwoHThreeB"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            <ImageButton
+                android:id="@+id/btnFiveB"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/fiveb"
+                android:background="@color/white"
+                android:layout_marginRight="5dp"/>
 
-        android:layout_marginEnd="16dp"
-        android:text="2H3B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnOneVThreeB"
-        app:layout_constraintTop_toBottomOf="@+id/btnFiveB"
-        app:layout_constraintVertical_bias="0.015" />
+            <ImageButton
+                android:id="@+id/btnTwoBThreeH"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/twobthreeh"
+                android:background="@color/white"
+                android:layout_marginRight="5dp"/>
 
-    <Button
-        android:id="@+id/btnTwoBThreeH"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_marginEnd="16dp"
-        android:text="2B3H"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/btnOneHThreeB"
-        app:layout_constraintTop_toBottomOf="@+id/btnTwoHThreeB"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/btnTwoVertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:text="2V"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.012"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btntwobox"
-        app:layout_constraintVertical_bias="0.015" />
-
-    <Button
-        android:id="@+id/btnTwoHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="2H"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnTwoVertical"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-    <!--  four  -->
-
-    <!--    Five-->
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
