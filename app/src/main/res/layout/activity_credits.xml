@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="#FBF4D8"
     tools:context=".Credits">
 
 
@@ -13,29 +13,87 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
-        android:fontFamily="@font/chawp"
+        android:fontFamily="@font/inria_sans"
         android:text="Back"
-        android:textColor="#FFF"
+        android:textColor="#000000"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.096" />
+        app:layout_constraintVertical_bias="0.087" />
+
+    <ImageView
+        android:id="@+id/imgCLogo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/icon"
+        app:layout_constraintBottom_toTopOf="@+id/txtCred"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adView"
+        app:layout_constraintVertical_bias="0.357" />
+
+
+    <TextView
+        android:id="@+id/txtCredits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@font/inria_sans"
+        android:text="CREDITS"
+        android:textColor="#000
+"
+        android:textSize="36dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtCred"
+        app:layout_constraintStart_toStartOf="@+id/txtCred" />
 
     <TextView
         android:id="@+id/txtCred"
-        android:layout_width="330dp"
-        android:layout_height="512dp"
-        android:layout_marginTop="28dp"
-        android:fontFamily="@font/chawp"
-        android:text="Post Grid Maker \n Created By AquaBlueIce \n\n One week planning \n And Three days coding \n\n\n\n\n\n\n\n\n Icon created by amanda miranda\n\n v1.6.0"
-        android:textColor="#fff"
-        android:textSize="20dp"
+        android:layout_width="373dp"
+        android:layout_height="335dp"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/inria_sans"
+        android:scrollbars="vertical"
+        android:text="Post Grid Maker \n Created By AquaBlueIce \n\n One week planning \n And Three days coding \n\n Icon created by Amanda M.\n\n v1.11 \n\n\n Hi ako si Akuwa, gumagawa po ko ng app as my practice dahil gusto ko maging programmer, nag co-content sa Youtube, livestream sa TikTok at Twitch, nag d-drawing digital and traditional na makikita po ninyo sa Instagram ko, at sumusubok po ako ngayon gumawa ng 3d model para sa minecraft. Wala po akong pera at trabaho. \n\nYou can support me financially through memberships on my TikTok and YouTube channels, or by making a donation on my Patreon or PayPal. Thank you!\n\nYou can use the button below!"
+        android:textColor="#000000"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/adView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCredits" />
+        app:layout_constraintTop_toBottomOf="@+id/adView"
+        app:layout_constraintVertical_bias="0.752" />
+
+    <LinearLayout
+        android:layout_width="287dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/adView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCred"
+        app:layout_constraintVertical_bias="0.466">
+
+        <ImageButton
+            android:id="@+id/ibtnpaypal"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/roundcorner"
+            android:scaleType="fitCenter"
+            android:src="@drawable/paypal" />
+
+        <ImageButton
+            android:id="@+id/ibtnpatreon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/roundcorner"
+            android:scaleType="fitCenter"
+            android:src="@drawable/patreon" />
+    </LinearLayout>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"

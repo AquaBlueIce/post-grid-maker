@@ -4,60 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="#FBF4D8"
     tools:context=".MainActivity">
 
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="113dp"
-        android:layout_marginEnd="73dp"
-        android:fontFamily="@font/chawp"
-        android:text="Post"
-        android:textColor="#FFF"
-        android:textSize="100dp"
-        app:layout_constraintBottom_toTopOf="@+id/adView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143" />
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="66dp"
-        android:layout_marginEnd="164dp"
-        android:fontFamily="@font/chawp"
-        android:text="Grid"
-        android:textColor="#FFF"
-        android:textSize="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.322" />
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="82dp"
-        android:layout_marginEnd="31dp"
-        android:fontFamily="@font/chawp"
-        android:text="Maker"
-        android:textColor="#FFF"
-        android:textSize="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.523" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
@@ -84,16 +33,27 @@
         app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
 
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="169dp"
+        android:layout_height="169dp"
+        android:layout_marginTop="128dp"
+        android:src="@drawable/icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adView" />
+
     <Button
         android:id="@+id/btnFacebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="156dp"
+        android:layout_marginBottom="236dp"
         android:background="?android:attr/selectableItemBackground"
-        android:fontFamily="@font/chawp"
+        android:fontFamily="@font/inria_sans"
         android:text="Facebook"
-        android:textColor="#FFF"
-        android:textSize="30dp"
+        android:textColor="#000"
+        android:textSize="36dp"
         app:layout_constraintBottom_toTopOf="@+id/adView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -103,30 +63,98 @@
         android:id="@+id/btnInstagram"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="180dp"
         android:background="?android:attr/selectableItemBackground"
-        android:fontFamily="@font/chawp"
+        android:fontFamily="@font/inria_sans"
         android:text="Instagram"
-        android:textColor="#FFF"
-        android:textSize="30dp"
+        android:textColor="#000"
+        android:textSize="36dp"
         app:layout_constraintBottom_toTopOf="@+id/adView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnFacebook"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btnCredits"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="140dp"
         android:background="?android:attr/selectableItemBackground"
-        android:fontFamily="@font/chawp"
+        android:fontFamily="@font/inria_sans"
         android:text="Credits"
-        android:textColor="#FFF"
+        android:textColor="#000"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/adView2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnInstagram"
+        app:layout_constraintVertical_bias="0.66" />
+
+    <LinearLayout
+        android:layout_width="392dp"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/adView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCredits">
+
+        <ImageButton
+            android:id="@+id/ibtndiscord"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/roundcorner"
+            android:scaleType="fitCenter"
+            android:src="@drawable/discord" />
+
+        <ImageButton
+            android:id="@+id/ibtnyoutube"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/roundcorner"
+            android:scaleType="fitCenter"
+            android:src="@drawable/yt" />
+        <ImageButton
+            android:id="@+id/ibtntiktok"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/roundcorner"
+            android:scaleType="fitCenter"
+            android:src="@drawable/tikt" />
+        <ImageButton
+            android:id="@+id/ibtnx"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/roundcorner"
+            android:scaleType="fitCenter"
+            android:src="@drawable/x" />
+
+        <ImageButton
+            android:id="@+id/ibtninstagram"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/roundcorner"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ig" />
+
+        <ImageButton
+            android:id="@+id/ibtntwitch"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/roundcorner"
+            android:scaleType="fitCenter"
+            android:src="@drawable/twitch" />
+
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

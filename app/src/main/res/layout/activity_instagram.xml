@@ -4,23 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="#FBF4D8"
     tools:context=".Instagram">
 
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="101dp"
+        android:layout_height="46dp"
+        android:background="#B2967E"
+        android:fontFamily="@font/inria_sans"
+        android:shadowColor="@color/black"
+        android:text="SAVE"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtFacebook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adView"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/txtFacebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
-        android:fontFamily="@font/chawp"
-        android:text="Instagram"
-        android:textColor="#FFF"
+        android:fontFamily="@font/inria_sans"
+        android:text="INSTAGRAM"
+        android:textColor="#000"
         android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adView" />
+        app:layout_constraintTop_toBottomOf="@+id/adView"
+        app:layout_constraintVertical_bias="0.676" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -47,90 +64,90 @@
                 android:id="@+id/btnOneTwo"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/onetwo"
-                android:background="@color/white"
                 android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/onetwo"
                 android:text="1-2" />
 
             <ImageButton
                 android:id="@+id/btnOneThree"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/onethree"
-                android:background="@color/white"
                 android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/onethree"
                 android:text="1-3" />
 
             <ImageButton
                 android:id="@+id/btnTwoOne"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/twoone"
-                android:background="@color/white"
                 android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/twoone"
                 android:text="2-1" />
 
             <ImageButton
                 android:id="@+id/btnTwoTwo"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/twotwo"
-                android:background="@color/white"
                 android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/twotwo"
                 android:text="2-2" />
 
             <ImageButton
                 android:id="@+id/btnTwoThree"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/twothree"
-                android:background="@color/white"
                 android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/twothree"
                 android:text="2-3" />
 
             <ImageButton
                 android:id="@+id/btnThreeOne"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/threeone"
-                android:background="@color/white"
                 android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/threeone"
                 android:text="3-1" />
 
             <ImageButton
                 android:id="@+id/btnThreeTwo"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/threetwo"
-                android:background="@color/white"
                 android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/threetwo"
                 android:text="3-2" />
 
             <ImageButton
                 android:id="@+id/btnThreeThree"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/threethree"
-                android:background="@color/white"
                 android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/threethree"
                 android:text="3-3" />
 
             <ImageButton
                 android:id="@+id/btnThreeFour"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/threefour"
-                android:background="@color/white"
                 android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/threefour"
                 android:text="3-4" />
 
             <ImageButton
                 android:id="@+id/btnThreeFive"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/threefive"
-                android:background="@color/white"
                 android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/threefive"
                 android:text="3-5" />
         </LinearLayout>
     </HorizontalScrollView>

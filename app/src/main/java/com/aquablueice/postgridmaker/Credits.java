@@ -1,9 +1,13 @@
 package com.aquablueice.postgridmaker;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +19,8 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 
 public class Credits extends AppCompatActivity {
 
+    ImageButton ibtnPaypal, ibtnPatreon;
+    TextView txtCredits;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +31,12 @@ public class Credits extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
+
+
+        ibtnPatreon = findViewById(R.id.ibtnpatreon);
+        ibtnPaypal = findViewById(R.id.ibtnpaypal);
+
+        txtCredits = findViewById(R.id.txtCred);
 
         AdView mAdView = findViewById(R.id.adView);
         AdView addview = (findViewById(R.id.adView2));
@@ -41,5 +53,23 @@ public class Credits extends AppCompatActivity {
                 startActivity(new Intent(Credits.this, MainActivity.class));
             }
         });
+        txtCredits.setMovementMethod(new ScrollingMovementMethod());
+
+
+        ibtnPatreon.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                goLink("https://www.patreon.com/aquablueice");
+            }
+        });
+        ibtnPaypal.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                goLink("https://www.paypal.me/aquablueice");
+            }
+        });
+    }
+
+    private void goLink(String url) {
+        Uri uri = Uri.parse(url);
+        startActivity(new Intent(Intent.ACTION_VIEW,uri));
     }
 }

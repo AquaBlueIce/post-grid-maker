@@ -1,5 +1,7 @@
 package com.aquablueice.postgridmaker;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -8,6 +10,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -36,8 +39,11 @@ public class Instagram extends AppCompatActivity {
     public AdView mAdView, addview;
     Uri uri;
     ImageButton btn12, btn13,btn21, btn22, btn23, btn31, btn32, btn33, btn34, btn35;
+    Button btnSave;
     ImageView imageView;
     String grid;
+    List<Bitmap> bitmapList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +60,11 @@ public class Instagram extends AppCompatActivity {
         btn33 = (ImageButton) findViewById(R.id.btnThreeThree);
         btn34 = (ImageButton) findViewById(R.id.btnThreeFour);
         btn35 = (ImageButton) findViewById(R.id.btnThreeFive);
+        btnSave = (Button) findViewById(R.id.btnSave);
         imageView = findViewById(R.id.imageView);
+
+//        List<Bitmap> finalBitmapList;
+//        finalBitmapList = new ArrayList<Bitmap>();
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -70,6 +80,19 @@ public class Instagram extends AppCompatActivity {
         addview.loadAd(adRequest);
 
 
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (bitmapList != null) {
+                    for (int i = 0; i < bitmapList.size(); i++) {
+                        String count = String.valueOf(i);
+                        saveImage(bitmapList.get(i), count);
+                    }
+                } else {
+                    Toast.makeText(Instagram.this, "No images to save", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
 
 
@@ -181,6 +204,7 @@ public class Instagram extends AppCompatActivity {
                 grid = "35";
             }
         });
+
     }
 
     @Override
@@ -202,11 +226,12 @@ public class Instagram extends AppCompatActivity {
         } else {
             Toast.makeText(this, "You select nothing...", Toast.LENGTH_SHORT).show();
         }
-
     }
 
-    public  void startCutting(Bitmap bitmap){
-        List<Bitmap> bitmapList = new ArrayList<Bitmap>();
+
+
+    public void startCutting(Bitmap bitmap){
+        bitmapList = new ArrayList<Bitmap>();
         switch (grid) {
             case "12":
                 bitmapList = oneTwo(bitmap);
@@ -240,211 +265,234 @@ public class Instagram extends AppCompatActivity {
                 break;
         }
 
-        for (int i = 0; i < bitmapList.size();i++){
-            String count = String.valueOf(i);
-            saveImage(bitmapList.get(i),count);
+//        for (int i = 0; i < bitmapList.size();i++){
+//            String count = String.valueOf(i);
+//            saveImage(bitmapList.get(i),count);
+//        }
+    }
+
+    private void saveImage(Bitmap bitmap, String imageName) {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_" + imageName + ".jpg";
+
+        OutputStream fos;
+        try {
+            fos = new FileOutputStream(new File(Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_PICTURES), imageFileName));
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+
+            // Add the image to the gallery
+            MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, imageFileName, null);
+
+            Toast.makeText(this, "Image saved: " + imageFileName, Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            Log.e(TAG, "File not found: " + e.getMessage());
+        } catch (IOException e) {
+            Log.e(TAG, "Error accessing file: " + e.getMessage());
         }
     }
 
 
     public List<Bitmap> oneTwo(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth(), picture.getHeight()/2);
-        imgs.add(first);
+        bitmaps.add(first);
         Bitmap second= Bitmap.createBitmap(picture, 0, picture.getHeight()/2, picture.getWidth(), picture.getHeight()/2);
-        imgs.add(second);
-        return imgs;
+        bitmaps.add(second);
+        return bitmaps;
     }
 
     public List<Bitmap> oneThree(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth(), picture.getHeight()/3);
-        imgs.add(first);
+        bitmaps.add(first);
         Bitmap second= Bitmap.createBitmap(picture, 0, picture.getHeight()/3, picture.getWidth(), picture.getHeight()/3);
-        imgs.add(second);
+        bitmaps.add(second);
         Bitmap third= Bitmap.createBitmap(picture, 0, (picture.getHeight()/3)*2, picture.getWidth(), picture.getHeight()/3);
-        imgs.add(third);
-        return imgs;
+        bitmaps.add(third);
+        return bitmaps;
     }
 
 
     public List<Bitmap> twoOne(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth()/2, picture.getHeight()/2);
-        imgs.add(first);
+        bitmaps.add(first);
         Bitmap second= Bitmap.createBitmap(picture, picture.getWidth()/2, 0, picture.getWidth()/2, picture.getHeight()/2);
-        imgs.add(second);
+        bitmaps.add(second);
         Bitmap third= Bitmap.createBitmap(picture, 0, picture.getHeight()/2, picture.getWidth()/2, picture.getHeight()/2);
-        imgs.add(third);
+        bitmaps.add(third);
         Bitmap forth= Bitmap.createBitmap(picture, picture.getWidth()/2, picture.getHeight()/2, picture.getWidth()/2, picture.getHeight()/2);
-        imgs.add(forth);
-        return imgs;
+        bitmaps.add(forth);
+        return bitmaps;
     }
     public List<Bitmap> twoTwo(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps = new ArrayList<Bitmap>();
         Bitmap left = Bitmap.createBitmap(picture, 0, 0, picture.getWidth()/2, picture.getHeight());
-        imgs.add(left);
+        bitmaps.add(left);
         Bitmap right= Bitmap.createBitmap(picture, picture.getWidth()/2, 0, picture.getWidth()/2, picture.getHeight());
-        imgs.add(right);
-        return imgs;
+        bitmaps.add(right);
+        return bitmaps;
     }
 
     public List<Bitmap> twoThree(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth()/2, picture.getHeight()/3);
-        imgs.add(first);
+        bitmaps.add(first);
         Bitmap second= Bitmap.createBitmap(picture, picture.getWidth()/2, 0, picture.getWidth()/2, picture.getHeight()/3);
-        imgs.add(second);
+        bitmaps.add(second);
         Bitmap third= Bitmap.createBitmap(picture, 0, picture.getHeight()/3, picture.getWidth()/2, picture.getHeight()/3);
-        imgs.add(third);
+        bitmaps.add(third);
         Bitmap forth= Bitmap.createBitmap(picture, picture.getWidth()/2, picture.getHeight()/3, picture.getWidth()/2, picture.getHeight()/3);
-        imgs.add(forth);
+        bitmaps.add(forth);
         Bitmap fifth= Bitmap.createBitmap(picture, 0, (picture.getHeight()/3)*2, picture.getWidth()/2, picture.getHeight()/3);
-        imgs.add(fifth);
+        bitmaps.add(fifth);
         Bitmap sixth= Bitmap.createBitmap(picture, picture.getWidth()/2, (picture.getHeight()/3)*2, picture.getWidth()/2, picture.getHeight()/3);
-        imgs.add(sixth);
-        return imgs;
+        bitmaps.add(sixth);
+        return bitmaps;
     }
 
     public List<Bitmap> threeOne(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth()/3, picture.getHeight());
-        imgs.add(first);
+        bitmaps.add(first);
         Bitmap second= Bitmap.createBitmap(picture, picture.getWidth()/3, 0, picture.getWidth()/3, picture.getHeight());
-        imgs.add(second);
+        bitmaps.add(second);
         Bitmap third= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, 0, picture.getWidth()/3, picture.getHeight());
-        imgs.add(third);
-        return imgs;
+        bitmaps.add(third);
+        return bitmaps;
     }
 
     public List<Bitmap> threeTwo(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth()/3, picture.getHeight()/2);
-        imgs.add(first);
+        bitmaps.add(first);
         Bitmap second= Bitmap.createBitmap(picture, picture.getWidth()/3, 0, picture.getWidth()/3, picture.getHeight()/2);
-        imgs.add(second);
+        bitmaps.add(second);
         Bitmap third= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, 0, picture.getWidth()/3, picture.getHeight()/2);
-        imgs.add(third);
+        bitmaps.add(third);
         Bitmap forth = Bitmap.createBitmap(picture, 0, picture.getHeight()/2, picture.getWidth()/3, picture.getHeight()/2);
-        imgs.add(forth);
+        bitmaps.add(forth);
         Bitmap fifth= Bitmap.createBitmap(picture, picture.getWidth()/3, picture.getHeight()/2, picture.getWidth()/3, picture.getHeight()/2);
-        imgs.add(fifth);
+        bitmaps.add(fifth);
         Bitmap sixth= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, picture.getHeight()/2, picture.getWidth()/3, picture.getHeight()/2);
-        imgs.add(sixth);
-        return imgs;
+        bitmaps.add(sixth);
+        return bitmaps;
     }
 
     public List<Bitmap> threeThree(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth()/3, picture.getHeight()/3);
-        imgs.add(first);
+        bitmaps.add(first);
         Bitmap second= Bitmap.createBitmap(picture, picture.getWidth()/3, 0, picture.getWidth()/3, picture.getHeight()/3);
-        imgs.add(second);
+        bitmaps.add(second);
         Bitmap third= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, 0, picture.getWidth()/3, picture.getHeight()/3);
-        imgs.add(third);
+        bitmaps.add(third);
         Bitmap forth = Bitmap.createBitmap(picture, 0, picture.getHeight()/3, picture.getWidth()/3, picture.getHeight()/3);
-        imgs.add(forth);
+        bitmaps.add(forth);
         Bitmap fifth= Bitmap.createBitmap(picture, picture.getWidth()/3, picture.getHeight()/3, picture.getWidth()/3, picture.getHeight()/3);
-        imgs.add(fifth);
+        bitmaps.add(fifth);
         Bitmap sixth= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, picture.getHeight()/3, picture.getWidth()/3, picture.getHeight()/3);
-        imgs.add(sixth);
+        bitmaps.add(sixth);
         Bitmap seven = Bitmap.createBitmap(picture, 0, (picture.getHeight()/3)*2, picture.getWidth()/3, picture.getHeight()/3);
-        imgs.add(seven);
+        bitmaps.add(seven);
         Bitmap eight= Bitmap.createBitmap(picture, picture.getWidth()/3, (picture.getHeight()/3)*2, picture.getWidth()/3, picture.getHeight()/3);
-        imgs.add(eight);
+        bitmaps.add(eight);
         Bitmap nine= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, (picture.getHeight()/3)*2, picture.getWidth()/3, picture.getHeight()/3);
-        imgs.add(nine);
-        return imgs;
+        bitmaps.add(nine);
+        return bitmaps;
     }
 
     public List<Bitmap> threeFour(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth()/3, picture.getHeight()/4);
-        imgs.add(first);
+        bitmaps.add(first);
         Bitmap second= Bitmap.createBitmap(picture, picture.getWidth()/3, 0, picture.getWidth()/3, picture.getHeight()/4);
-        imgs.add(second);
+        bitmaps.add(second);
         Bitmap third= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, 0, picture.getWidth()/3, picture.getHeight()/4);
-        imgs.add(third);
+        bitmaps.add(third);
         Bitmap forth = Bitmap.createBitmap(picture, 0, picture.getHeight()/4, picture.getWidth()/3, picture.getHeight()/4);
-        imgs.add(forth);
+        bitmaps.add(forth);
         Bitmap fifth= Bitmap.createBitmap(picture, picture.getWidth()/3, picture.getHeight()/4, picture.getWidth()/3, picture.getHeight()/4);
-        imgs.add(fifth);
+        bitmaps.add(fifth);
         Bitmap sixth= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, picture.getHeight()/4, picture.getWidth()/3, picture.getHeight()/4);
-        imgs.add(sixth);
+        bitmaps.add(sixth);
         Bitmap seven = Bitmap.createBitmap(picture, 0, (picture.getHeight()/4)*2, picture.getWidth()/3, picture.getHeight()/4);
-        imgs.add(seven);
+        bitmaps.add(seven);
         Bitmap eight= Bitmap.createBitmap(picture, picture.getWidth()/3, (picture.getHeight()/4)*2, picture.getWidth()/3, picture.getHeight()/4);
-        imgs.add(eight);
+        bitmaps.add(eight);
         Bitmap nine= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, (picture.getHeight()/4)*2, picture.getWidth()/3, picture.getHeight()/4);
-        imgs.add(nine);
+        bitmaps.add(nine);
         Bitmap ten = Bitmap.createBitmap(picture, 0, (picture.getHeight()/4)*3, picture.getWidth()/3, picture.getHeight()/4);
-        imgs.add(ten);
+        bitmaps.add(ten);
         Bitmap eleven= Bitmap.createBitmap(picture, picture.getWidth()/3, (picture.getHeight()/4)*3, picture.getWidth()/3, picture.getHeight()/4);
-        imgs.add(eleven);
+        bitmaps.add(eleven);
         Bitmap twelve= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, (picture.getHeight()/4)*3, picture.getWidth()/3, picture.getHeight()/4);
-        imgs.add(twelve);
-        return imgs;
+        bitmaps.add(twelve);
+        return bitmaps;
     }
 
     public List<Bitmap> threeFive(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth()/3, picture.getHeight()/5);
-        imgs.add(first);
+        bitmaps.add(first);
         Bitmap second= Bitmap.createBitmap(picture, picture.getWidth()/3, 0, picture.getWidth()/3, picture.getHeight()/5);
-        imgs.add(second);
+        bitmaps.add(second);
         Bitmap third= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, 0, picture.getWidth()/3, picture.getHeight()/5);
-        imgs.add(third);
+        bitmaps.add(third);
         Bitmap forth = Bitmap.createBitmap(picture, 0, picture.getHeight()/5, picture.getWidth()/3, picture.getHeight()/5);
-        imgs.add(forth);
+        bitmaps.add(forth);
         Bitmap fifth= Bitmap.createBitmap(picture, picture.getWidth()/3, picture.getHeight()/5, picture.getWidth()/3, picture.getHeight()/5);
-        imgs.add(fifth);
+        bitmaps.add(fifth);
         Bitmap sixth= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, picture.getHeight()/5, picture.getWidth()/3, picture.getHeight()/5);
-        imgs.add(sixth);
+        bitmaps.add(sixth);
         Bitmap seven = Bitmap.createBitmap(picture, 0, (picture.getHeight()/5)*2, picture.getWidth()/3, picture.getHeight()/5);
-        imgs.add(seven);
+        bitmaps.add(seven);
         Bitmap eight= Bitmap.createBitmap(picture, picture.getWidth()/3, (picture.getHeight()/5)*2, picture.getWidth()/3, picture.getHeight()/5);
-        imgs.add(eight);
+        bitmaps.add(eight);
         Bitmap nine= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, (picture.getHeight()/5)*2, picture.getWidth()/3, picture.getHeight()/5);
-        imgs.add(nine);
+        bitmaps.add(nine);
         Bitmap ten = Bitmap.createBitmap(picture, 0, (picture.getHeight()/5)*3, picture.getWidth()/3, picture.getHeight()/5);
-        imgs.add(ten);
+        bitmaps.add(ten);
         Bitmap eleven= Bitmap.createBitmap(picture, picture.getWidth()/3, (picture.getHeight()/5)*3, picture.getWidth()/3, picture.getHeight()/5);
-        imgs.add(eleven);
+        bitmaps.add(eleven);
         Bitmap twelve= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, (picture.getHeight()/5)*3, picture.getWidth()/3, picture.getHeight()/5);
-        imgs.add(twelve);
+        bitmaps.add(twelve);
         Bitmap thirteen = Bitmap.createBitmap(picture, 0, (picture.getHeight()/5)*4, picture.getWidth()/3, picture.getHeight()/5);
-        imgs.add(thirteen);
+        bitmaps.add(thirteen);
         Bitmap fourteen= Bitmap.createBitmap(picture, picture.getWidth()/3, (picture.getHeight()/5)*4, picture.getWidth()/3, picture.getHeight()/5);
-        imgs.add(fourteen);
+        bitmaps.add(fourteen);
         Bitmap fifteen= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, (picture.getHeight()/5)*4, picture.getWidth()/3, picture.getHeight()/5);
-        imgs.add(fifteen);
-        return imgs;
+        bitmaps.add(fifteen);
+        return bitmaps;
     }
 
 
-
-    public void saveImage(Bitmap image, String nam){
-        try {
-            String root = Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES).toString();
-            File myDir = new File(root + "/postGridMaker by AquaBlueIce");
-            String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
-            myDir.mkdirs();
-            String fname =  "pgm-" + nam + "-" + timeStamp + ".jpg";
-            File file = new File(myDir, fname);
-
-            FileOutputStream out = new FileOutputStream(file);
-            OutputStream outputStream = getContentResolver().openOutputStream(Uri.fromFile(file));
-            Bitmap bm = image;
-            bm.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-            out.flush();
-            out.close();
-            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + Environment.getExternalStorageDirectory())));
-
-            Toast.makeText(this , "Saved to "+ root + "/postGridMaker by AquaBlueIce", Toast.LENGTH_SHORT).show();
-        } catch( Exception e) {
-            Log.d("onBtnSavePng", e.toString());
-        }
-
-    }
+//========================Nilipat sa taas
+//    public void saveImage(Bitmap image, String nam){
+//        try {
+//            String root = Environment.getExternalStoragePublicDirectory(
+//                    Environment.DIRECTORY_PICTURES).toString();
+//            File myDir = new File(root + "/postGridMaker by AquaBlueIce");
+//            String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
+//            myDir.mkdirs();
+//            String fname =  "pgm-" + nam + "-" + timeStamp + ".jpg";
+//            File file = new File(myDir, fname);
+//
+//            FileOutputStream out = new FileOutputStream(file);
+//            OutputStream outputStream = getContentResolver().openOutputStream(Uri.fromFile(file));
+//            Bitmap bm = image;
+//            bm.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+//            out.flush();
+//            out.close();
+//            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + Environment.getExternalStorageDirectory())));
+//
+//            Toast.makeText(this , "Saved to "+ root + "/postGridMaker by AquaBlueIce", Toast.LENGTH_SHORT).show();
+//        } catch( Exception e) {
+//            Log.d("onBtnSavePng", e.toString());
+//        }
+//
+//    }
 }

@@ -4,23 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="#FBF4D8"
     tools:context=".Facebook">
-
-
-    <TextView
-        android:id="@+id/btnFacebook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
-        android:fontFamily="@font/chawp"
-        android:text="Facebook"
-        android:textColor="#FFF"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adView" />
 
 
     <ImageView
@@ -31,6 +16,39 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.366"
         tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="101dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        android:background="#B2967E"
+        android:fontFamily="@font/inria_sans"
+        android:shadowColor="@color/black"
+        android:text="SAVE"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnFacebook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/btnFacebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:fontFamily="@font/inria_sans"
+        android:text="FACEBOOK"
+        android:textColor="#000"
+        android:textSize="30dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adView" />
 
     <HorizontalScrollView
         android:layout_width="match_parent"
@@ -49,81 +67,81 @@
                 android:id="@+id/btntwobox"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/twob"
-                android:background="@color/white"
-                android:layout_marginRight="5dp" />
+                android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/twob" />
 
             <ImageButton
                 android:id="@+id/btnTwoVertical"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/twov"
-                android:background="@color/white"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/twov" />
 
             <ImageButton
                 android:id="@+id/btnTwoHorizontal"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/twoh"
-                android:background="@color/white"
-                android:layout_marginRight="5dp" />
+                android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/twoh" />
 
             <ImageButton
                 android:id="@+id/btnOneVerticalTwoBox"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/onevtwob"
-                android:background="@color/white"
-                android:layout_marginRight="5dp" />
+                android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/onevtwob" />
 
             <ImageButton
                 android:id="@+id/btnOneHorizontalTwoBox"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/onehtwob"
-                android:background="@color/white"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/onehtwob" />
 
             <ImageButton
                 android:id="@+id/btnFourBox"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/fourb"
-                android:background="@color/white"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/fourb" />
 
             <ImageButton
                 android:id="@+id/btnOneVThreeB"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/onevthreeb"
-                android:background="@color/white"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/onevthreeb" />
 
             <ImageButton
                 android:id="@+id/btnOneHThreeB"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/onehthreeb"
-                android:background="@color/white"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/onehthreeb" />
 
             <ImageButton
                 android:id="@+id/btnFiveB"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/fiveb"
-                android:background="@color/white"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/fiveb" />
 
             <ImageButton
                 android:id="@+id/btnTwoBThreeH"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
-                android:src="@drawable/twobthreeh"
-                android:background="@color/white"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="5dp"
+                android:background="#B5CFE7"
+                android:src="@drawable/twobthreeh" />
 
         </LinearLayout>
     </HorizontalScrollView>

@@ -12,6 +12,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -40,9 +41,11 @@ public class Facebook extends AppCompatActivity {
 
     ImageView imageView;
     ImageButton btn2box, btn2V, btn2H, btn1V2B, btn1H2B, btn4B,btn1V3B, btn1H3B, btn5B, btn2H3B, btn2B3H;
+    Button btnSave;
     String grid;
     Uri uri;
     public AdView mAdView, addview;
+    List<Bitmap> bitmapList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class Facebook extends AppCompatActivity {
         btn1H3B = (ImageButton) findViewById(R.id.btnOneHThreeB);
         btn5B   = (ImageButton) findViewById(R.id.btnFiveB);
         btn2B3H = (ImageButton) findViewById(R.id.btnTwoBThreeH);
+        btnSave = (Button) findViewById(R.id.btnSave);
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -74,6 +78,20 @@ public class Facebook extends AppCompatActivity {
         mAdView.loadAd(adRequest);
         addview.loadAd(adRequest);
 
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (bitmapList != null) {
+                    for (int i = 0; i < bitmapList.size(); i++) {
+                        String count = String.valueOf(i);
+                        saveImage(bitmapList.get(i), count);
+                    }
+                } else {
+                    Toast.makeText(Facebook.this, "No images to save", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         btn2box.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,17 +226,11 @@ public class Facebook extends AppCompatActivity {
         } else {
             Toast.makeText(this, "You select nothing...", Toast.LENGTH_SHORT).show();
         }
-
-
-
-
     }
 
     public  void startCutting(Bitmap bitmap){
 //        Bitmap[] bitmapList = new Bitmap[2];
-
-
-        List<Bitmap> bitmapList = new ArrayList<Bitmap>();
+        bitmapList = new ArrayList<Bitmap>();
 
 
 
@@ -261,132 +273,153 @@ public class Facebook extends AppCompatActivity {
                 break;
 
         }
+
+//============================PINATANGGAL NI CHAT GPT
 //        bitmapList = twoBox(bitmap);
-
-        for (int i = 0; i < bitmapList.size();i++){
-            String count = String.valueOf(i);
-            saveImage(bitmapList.get(i),count);
-
-        }
+//
+//        for (int i = 0; i < bitmapList.size();i++){
+//            String count = String.valueOf(i);
+//            saveImage(bitmapList.get(i),count);
+//
+//        }
 //        newSaveImage(bitmapList.get(1));
 //        storeImage(bitmapList.get(1));
     }
+//-------------------------------ITO YUNG UNA KONG GAWA
+//    private String saveToInternalStorage(Bitmap bitmapImage){
+//        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+//        // path to /data/data/yourapp/app_data/imageDir
+//        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+//        // Create imageDir
+//        File mypath=new File(directory,"profile.jpg");
+//
+//        FileOutputStream fos = null;
+//        try {
+//            fos = new FileOutputStream(mypath);
+//            // Use the compress method on the BitMap object to write image to the OutputStream
+//            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                fos.close();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return directory.getAbsolutePath();
+//    }
 
-    private String saveToInternalStorage(Bitmap bitmapImage){
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        // Create imageDir
-        File mypath=new File(directory,"profile.jpg");
 
-        FileOutputStream fos = null;
+    //==================ITO YUNG PINALAGAY NI GPT NILIPAT FROM BABA
+    private void saveImage(Bitmap bitmap, String imageName) {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_" + imageName + ".jpg";
+
+        OutputStream fos;
         try {
-            fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            fos = new FileOutputStream(new File(Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_PICTURES), imageFileName));
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+
+            // Add the image to the gallery
+            MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, imageFileName, null);
+
+            Toast.makeText(this, "Image saved: " + imageFileName, Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            Log.e(TAG, "File not found: " + e.getMessage());
+        } catch (IOException e) {
+            Log.e(TAG, "Error accessing file: " + e.getMessage());
         }
-        return directory.getAbsolutePath();
     }
 
 
-    //    public Bitmap[] twoBox(Bitmap picture) {
-//        Bitmap[] imgs = new Bitmap[2];
-//        imgs[0] = Bitmap.createBitmap(picture, 0, 0, picture.getWidth()/2, picture.getHeight());
-//        imgs[1] = Bitmap.createBitmap(picture, picture.getWidth()/2, 0, picture.getWidth()/2, picture.getHeight());
-//        return imgs;
-//    }
     public List<Bitmap> twoBox(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps  = new ArrayList<Bitmap>();
         Bitmap left = Bitmap.createBitmap(picture, 0, 0, picture.getWidth()/2, picture.getHeight());
-        imgs.add(left);
+        bitmaps .add(left);
         Bitmap right= Bitmap.createBitmap(picture, picture.getWidth()/2, 0, picture.getWidth()/2, picture.getHeight());
-        imgs.add(right);
-        return imgs;
+        bitmaps .add(right);
+        return bitmaps ;
     }
 
     public List<Bitmap> twoVertical(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps  = new ArrayList<Bitmap>();
         Bitmap left = Bitmap.createBitmap(picture, 0, 0, picture.getWidth()/2, picture.getHeight());
-        imgs.add(left);
+        bitmaps .add(left);
         Bitmap right= Bitmap.createBitmap(picture, picture.getWidth()/2, 0, picture.getWidth()/2, picture.getHeight());
-        imgs.add(right);
-        return imgs;
+        bitmaps .add(right);
+        return bitmaps ;
     }
 
     public List<Bitmap> twoHorizontal(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps  = new ArrayList<Bitmap>();
         Bitmap left = Bitmap.createBitmap(picture, 0, 0, picture.getWidth(), picture.getHeight()/2);
-        imgs.add(left);
+        bitmaps .add(left);
         Bitmap right= Bitmap.createBitmap(picture, 0, picture.getHeight()/2, picture.getWidth(), picture.getHeight()/2);
-        imgs.add(right);
-        return imgs;
+        bitmaps .add(right);
+        return bitmaps ;
     }
 
     public List<Bitmap> threeBox(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps  = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth()/3, picture.getHeight());
-        imgs.add(first);
+        bitmaps .add(first);
         Bitmap second= Bitmap.createBitmap(picture, picture.getWidth()/3, 0, picture.getWidth()/3, picture.getHeight());
-        imgs.add(second);
+        bitmaps .add(second);
         Bitmap third= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, 0, picture.getWidth()/3, picture.getHeight());
-        imgs.add(third);
-        return imgs;
+        bitmaps .add(third);
+        return bitmaps ;
     }
 
     public List<Bitmap> threeOneVerticalTwoBox(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps  = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth()/2, picture.getHeight());
-        imgs.add(first);
+        bitmaps .add(first);
         Bitmap second= Bitmap.createBitmap(picture, picture.getWidth()/2, 0, picture.getWidth()/2, picture.getHeight()/2);
-        imgs.add(second);
+        bitmaps .add(second);
         Bitmap third= Bitmap.createBitmap(picture, picture.getWidth()/2, picture.getHeight()/2, picture.getWidth()/2, picture.getHeight()/2);
-        imgs.add(third);
-        return imgs;
+        bitmaps .add(third);
+        return bitmaps ;
     }
 
     public List<Bitmap> threeOneHorizontalTwoBox(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps  = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth(), picture.getHeight()/2);
-        imgs.add(first);
+        bitmaps .add(first);
         Bitmap second= Bitmap.createBitmap(picture, 0, picture.getHeight()/2, picture.getWidth()/2, picture.getHeight()/2);
-        imgs.add(second);
+        bitmaps .add(second);
         Bitmap third= Bitmap.createBitmap(picture, picture.getWidth()/2, picture.getHeight()/2, picture.getWidth()/2, picture.getHeight()/2);
-        imgs.add(third);
-        return imgs;
+        bitmaps .add(third);
+        return bitmaps ;
     }
 
     public List<Bitmap> fourBox(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps  = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth()/2, picture.getHeight()/2);
-        imgs.add(first);
+        bitmaps .add(first);
         Bitmap second= Bitmap.createBitmap(picture, picture.getWidth()/2, 0, picture.getWidth()/2, picture.getHeight()/2);
-        imgs.add(second);
+        bitmaps .add(second);
         Bitmap third= Bitmap.createBitmap(picture, 0, picture.getHeight()/2, picture.getWidth()/2, picture.getHeight()/2);
-        imgs.add(third);
+        bitmaps .add(third);
         Bitmap forth= Bitmap.createBitmap(picture, picture.getWidth()/2, picture.getHeight()/2, picture.getWidth()/2, picture.getHeight()/2);
-        imgs.add(forth);
-        return imgs;
+        bitmaps .add(forth);
+        return bitmaps ;
     }
 
     public List<Bitmap> fourOneVerticalThreeBox(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps  = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(picture, 0, 0, (picture.getWidth()/3)*2, picture.getHeight());
-        imgs.add(first);
+        bitmaps .add(first);
         Bitmap second= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, 0, picture.getWidth()/3, picture.getHeight()/3);
-        imgs.add(second);
+        bitmaps .add(second);
         Bitmap third= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, picture.getHeight()/3, picture.getWidth()/3, picture.getHeight()/3);
-        imgs.add(third);
+        bitmaps .add(third);
         Bitmap forth= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, (picture.getHeight()/3)*2, picture.getWidth()/3, picture.getHeight()/3);
-        imgs.add(forth);
-        return imgs;
+        bitmaps .add(forth);
+        return bitmaps ;
     }
 
 //    public List<Bitmap> fourOneHorizontalThreeBox(Bitmap picture) {
@@ -404,171 +437,171 @@ public class Facebook extends AppCompatActivity {
 
     public List<Bitmap> fourOneHorizontalThreeBox(Bitmap picture) {
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(picture, 900, 900, false);
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps  = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(scaledBitmap, 0, 0, 900,600);
-        imgs.add(first);
+        bitmaps .add(first);
         Bitmap second= Bitmap.createBitmap(scaledBitmap, 0,600, 300,300);
-        imgs.add(second);
+        bitmaps .add(second);
         Bitmap third= Bitmap.createBitmap(scaledBitmap, 300,600,300, 300);
-        imgs.add(third);
+        bitmaps .add(third);
         Bitmap forth= Bitmap.createBitmap(scaledBitmap, 600,600,300, 300);
-        imgs.add(forth);
-        return imgs;
+        bitmaps .add(forth);
+        return bitmaps ;
     }
 
 
     public List<Bitmap> fiveBox(Bitmap picture) {
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(picture, 900, 750, false);
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps  = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(scaledBitmap, 0, 0, 450,450);
-        imgs.add(first);
+        bitmaps .add(first);
         Bitmap second = Bitmap.createBitmap(scaledBitmap, 450, 0, 450,450);
-        imgs.add(second);
+        bitmaps .add(second);
         Bitmap third= Bitmap.createBitmap(scaledBitmap, 0,450, 300,300);
-        imgs.add(third);
+        bitmaps .add(third);
         Bitmap forth= Bitmap.createBitmap(scaledBitmap, 300,450,300, 300);
-        imgs.add(forth);
+        bitmaps .add(forth);
         Bitmap fifth= Bitmap.createBitmap(scaledBitmap, 600,450,300, 300);
-        imgs.add(fifth);
-        return imgs;
+        bitmaps .add(fifth);
+        return bitmaps ;
     }
 
     public List<Bitmap> fiveTwoHorizontalThreeBox(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps  = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(picture, 0, 0, (picture.getWidth()/3)*2, picture.getHeight()/2);
-        imgs.add(first);
+        bitmaps .add(first);
         Bitmap second= Bitmap.createBitmap(picture, 0, picture.getHeight()/2, (picture.getWidth()/3)*2, picture.getHeight()/2);
-        imgs.add(second);
+        bitmaps .add(second);
         Bitmap third= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, 0, picture.getWidth()/3, picture.getHeight()/3);
-        imgs.add(third);
+        bitmaps .add(third);
         Bitmap forth= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, picture.getHeight()/2, picture.getWidth()/3, picture.getHeight()/3);
-        imgs.add(forth);
+        bitmaps .add(forth);
         Bitmap fifth= Bitmap.createBitmap(picture, (picture.getWidth()/3)*2, (picture.getHeight()/3)*2, picture.getWidth()/3, picture.getHeight()/3);
-        imgs.add(fifth);
-        return imgs;
+        bitmaps .add(fifth);
+        return bitmaps ;
     }
 
     public List<Bitmap> fiveTwoBoxThreeHorizontal(Bitmap picture) {
-        List<Bitmap> imgs = new ArrayList<Bitmap>();
+        List<Bitmap> bitmaps  = new ArrayList<Bitmap>();
         Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth()/2, picture.getHeight()/2);
-        imgs.add(first);
+        bitmaps .add(first);
         Bitmap second= Bitmap.createBitmap(picture, 0, picture.getHeight()/2, picture.getWidth()/2, picture.getHeight()/2);
-        imgs.add(second);
+        bitmaps .add(second);
         Bitmap third= Bitmap.createBitmap(picture, picture.getWidth()/2, 0, picture.getWidth()/2, picture.getHeight()/3);
-        imgs.add(third);
+        bitmaps .add(third);
         Bitmap forth= Bitmap.createBitmap(picture, picture.getWidth()/2, picture.getHeight()/3, picture.getWidth()/2, picture.getHeight()/3);
-        imgs.add(forth);
+        bitmaps .add(forth);
         Bitmap fifth= Bitmap.createBitmap(picture, picture.getWidth()/2, (picture.getHeight()/3)*2, picture.getWidth()/2, picture.getHeight()/3);
-        imgs.add(fifth);
-        return imgs;
+        bitmaps .add(fifth);
+        return bitmaps ;
     }
+//========================PINALIPAT NI GPT
+//    public void saveImage(Bitmap image, String nam){
+//        try {
+//            String root = Environment.getExternalStoragePublicDirectory(
+//                    Environment.DIRECTORY_PICTURES).toString();
+////            String rootanother = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Demo/";
+//            File myDir = new File(root + "/postGridMaker by AquaBlueIce");
+//            String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
+//            myDir.mkdirs();
+//            String fname =  "pgm-" + nam + "-" + timeStamp + ".jpg";
+//            File file = new File(myDir, fname);
+//
+//            FileOutputStream out = new FileOutputStream(file);
+//            OutputStream outputStream = getContentResolver().openOutputStream(Uri.fromFile(file));
+//            Bitmap bm = image;
+//            bm.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+////            out.flush();
+//            out.close();
+//            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + Environment.getExternalStorageDirectory())));
+//
+//            Toast.makeText(this , "Saved to "+ root + "/postGridMaker by AquaBlueIce", Toast.LENGTH_SHORT).show();
+//        } catch( Exception e) {
+//            Log.d("onBtnSavePng", e.toString());
+//        }
+//
+//    }
 
-    public void saveImage(Bitmap image, String nam){
-        try {
-            String root = Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES).toString();
-//            String rootanother = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Demo/";
-            File myDir = new File(root + "/postGridMaker by AquaBlueIce");
-            String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
-            myDir.mkdirs();
-            String fname =  "pgm-" + nam + "-" + timeStamp + ".jpg";
-            File file = new File(myDir, fname);
 
-            FileOutputStream out = new FileOutputStream(file);
-            OutputStream outputStream = getContentResolver().openOutputStream(Uri.fromFile(file));
-            Bitmap bm = image;
-            bm.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+//    private void tryToSaveImage(Bitmap image) {
+//        try {
+//            String root = Environment.getExternalStoragePublicDirectory(
+//                    Environment.DIRECTORY_PICTURES).toString();
+//            File myDir = new File(root + "/saved_images");
+//            myDir.mkdirs();
+//            String fname =  "1.jpg";
+//            File file = new File(myDir, fname);
+//
+//            int quality = 100;
+//            FileOutputStream fos = new FileOutputStream(file);
+//            image.compress(Bitmap.CompressFormat.JPEG, quality, fos);
+//            fos.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+//    private static void newSaveImage(Bitmap finalBitmap) {
+//
+//        String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
+//        File myDir = new File(root + "/saved_images");
+//        myDir.mkdirs();
+//
+//        String fname = "Image-.jpg";
+//        File file = new File (myDir, fname);
+//        if (file.exists ()) file.delete ();
+//        try {
+//            FileOutputStream out = new FileOutputStream(file);
+//            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
 //            out.flush();
-            out.close();
-            sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + Environment.getExternalStorageDirectory())));
+//            out.close();
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-            Toast.makeText(this , "Saved to "+ root + "/postGridMaker by AquaBlueIce", Toast.LENGTH_SHORT).show();
-        } catch( Exception e) {
-            Log.d("onBtnSavePng", e.toString());
-        }
-
-    }
-
-
-    private void tryToSaveImage(Bitmap image) {
-        try {
-            String root = Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_PICTURES).toString();
-            File myDir = new File(root + "/saved_images");
-            myDir.mkdirs();
-            String fname =  "1.jpg";
-            File file = new File(myDir, fname);
-
-            int quality = 100;
-            FileOutputStream fos = new FileOutputStream(file);
-            image.compress(Bitmap.CompressFormat.JPEG, quality, fos);
-            fos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void newSaveImage(Bitmap finalBitmap) {
-
-        String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
-        File myDir = new File(root + "/saved_images");
-        myDir.mkdirs();
-
-        String fname = "Image-.jpg";
-        File file = new File (myDir, fname);
-        if (file.exists ()) file.delete ();
-        try {
-            FileOutputStream out = new FileOutputStream(file);
-            finalBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
-            out.flush();
-            out.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void storeImage(Bitmap image) {
-        File pictureFile = getOutputMediaFile();
-        if (pictureFile == null) {
-            Log.d(TAG,
-                    "Error creating media file, check storage permissions: ");// e.getMessage());
-            return;
-        }
-        try {
-            FileOutputStream fos = new FileOutputStream(pictureFile);
-            image.compress(Bitmap.CompressFormat.PNG, 90, fos);
-            fos.close();
-        } catch (FileNotFoundException e) {
-            Log.d(TAG, "File not found: " + e.getMessage());
-        } catch (IOException e) {
-            Log.d(TAG, "Error accessing file: " + e.getMessage());
-        }
-    }
+//    private void storeImage(Bitmap image) {
+//        File pictureFile = getOutputMediaFile();
+//        if (pictureFile == null) {
+//            Log.d(TAG,
+//                    "Error creating media file, check storage permissions: ");// e.getMessage());
+//            return;
+//        }
+//        try {
+//            FileOutputStream fos = new FileOutputStream(pictureFile);
+//            image.compress(Bitmap.CompressFormat.PNG, 90, fos);
+//            fos.close();
+//        } catch (FileNotFoundException e) {
+//            Log.d(TAG, "File not found: " + e.getMessage());
+//        } catch (IOException e) {
+//            Log.d(TAG, "Error accessing file: " + e.getMessage());
+//        }
+//    }
 
     /** Create a File for saving an image or video */
-    private  File getOutputMediaFile(){
-        // To be safe, you should check that the SDCard is mounted
-        // using Environment.getExternalStorageState() before doing this.
-        File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
-                + "/Android/data/"
-                + getApplicationContext().getPackageName()
-                + "/Files");
-
-        // This location works best if you want the created images to be shared
-        // between applications and persist after your app has been uninstalled.
-
-        // Create the storage directory if it does not exist
-        if (! mediaStorageDir.exists()){
-            if (! mediaStorageDir.mkdirs()){
-                return null;
-            }
-        }
-        // Create a media file name
-        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
-        File mediaFile;
-        String mImageName="MI_"+ timeStamp +".jpg";
-        mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
-        return mediaFile;
-    }
+//    private  File getOutputMediaFile(){
+//        // To be safe, you should check that the SDCard is mounted
+//        // using Environment.getExternalStorageState() before doing this.
+//        File mediaStorageDir = new File(Environment.getExternalStorageDirectory()
+//                + "/Android/data/"
+//                + getApplicationContext().getPackageName()
+//                + "/Files");
+//
+//        // This location works best if you want the created images to be shared
+//        // between applications and persist after your app has been uninstalled.
+//
+//        // Create the storage directory if it does not exist
+//        if (! mediaStorageDir.exists()){
+//            if (! mediaStorageDir.mkdirs()){
+//                return null;
+//            }
+//        }
+//        // Create a media file name
+//        String timeStamp = new SimpleDateFormat("ddMMyyyy_HHmm").format(new Date());
+//        File mediaFile;
+//        String mImageName="MI_"+ timeStamp +".jpg";
+//        mediaFile = new File(mediaStorageDir.getPath() + File.separator + mImageName);
+//        return mediaFile;
+//    }
 }
