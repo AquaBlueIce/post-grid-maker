@@ -26,8 +26,8 @@ android {
     defaultConfig {
         applicationId "com.aquablueice.postgridmaker"
         minSdk 34
-        targetSdk 36.1
-        versionCode 11
+        targetSdk 36
+        versionCode 12
         versionName '1.12'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

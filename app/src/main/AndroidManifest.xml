@@ -23,9 +23,6 @@
             android:name=".Credits"
             android:exported="false" />
         <activity
-            android:name=".yee"
-            android:exported="false" />
-        <activity
             android:name=".Facebook"
             android:exported="false" />
 
