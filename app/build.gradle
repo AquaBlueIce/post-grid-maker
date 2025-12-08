@@ -25,10 +25,10 @@ android {
 
     defaultConfig {
         applicationId "com.aquablueice.postgridmaker"
-        minSdk 24
-        targetSdk 33
+        minSdk 34
+        targetSdk 36.1
         versionCode 11
-        versionName '1.11'
+        versionName '1.12'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

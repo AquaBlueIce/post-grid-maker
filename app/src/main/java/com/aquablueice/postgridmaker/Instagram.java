@@ -101,7 +101,7 @@ public class Instagram extends AppCompatActivity {
             public void onClick(View view) {
                 ImagePicker.with(Instagram.this)
                         .galleryOnly()
-                        .crop(1,2)
+                        .crop(1,3)
                         .start();
                 grid = "12";
             }
@@ -112,7 +112,7 @@ public class Instagram extends AppCompatActivity {
             public void onClick(View view) {
                 ImagePicker.with(Instagram.this)
                         .galleryOnly()
-                        .crop(1,3)
+                        .crop(1, 4.5F)
                         .start();
                 grid = "13";
             }
@@ -122,7 +122,7 @@ public class Instagram extends AppCompatActivity {
             public void onClick(View view) {
                 ImagePicker.with(Instagram.this)
                         .galleryOnly()
-                        .crop(2,1)
+                        .crop(4,2.5F)
                         .start();
                 grid = "21";
             }
@@ -133,7 +133,7 @@ public class Instagram extends AppCompatActivity {
             public void onClick(View view) {
                 ImagePicker.with(Instagram.this)
                         .galleryOnly()
-                        .crop(2,2)
+                        .crop(2,3)
                         .start();
                 grid = "22";
             }
@@ -144,7 +144,7 @@ public class Instagram extends AppCompatActivity {
             public void onClick(View view) {
                 ImagePicker.with(Instagram.this)
                         .galleryOnly()
-                        .crop(2,3)
+                        .crop(2,4.5F)
                         .start();
                 grid = "23";
             }
@@ -155,7 +155,7 @@ public class Instagram extends AppCompatActivity {
             public void onClick(View view) {
                 ImagePicker.with(Instagram.this)
                         .galleryOnly()
-                        .crop(3,1)
+                        .crop(1.75F,1)
                         .start();
                 grid = "31";
             }
@@ -166,7 +166,7 @@ public class Instagram extends AppCompatActivity {
             public void onClick(View view) {
                 ImagePicker.with(Instagram.this)
                         .galleryOnly()
-                        .crop(3,2)
+                        .crop(3,3)
                         .start();
                 grid = "32";
             }
@@ -177,7 +177,7 @@ public class Instagram extends AppCompatActivity {
             public void onClick(View view) {
                 ImagePicker.with(Instagram.this)
                         .galleryOnly()
-                        .crop(1,1)
+                        .crop(3,4.5F)
                         .start();
                 grid = "33";
             }
@@ -188,7 +188,7 @@ public class Instagram extends AppCompatActivity {
             public void onClick(View view) {
                 ImagePicker.with(Instagram.this)
                         .galleryOnly()
-                        .crop(3,4)
+                        .crop(3,6)
                         .start();
                 grid = "34";
             }
@@ -199,7 +199,7 @@ public class Instagram extends AppCompatActivity {
             public void onClick(View view) {
                 ImagePicker.with(Instagram.this)
                         .galleryOnly()
-                        .crop(3,5)
+                        .crop(3,6.5F)
                         .start();
                 grid = "35";
             }

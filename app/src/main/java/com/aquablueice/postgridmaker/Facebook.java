@@ -422,18 +422,6 @@ public class Facebook extends AppCompatActivity {
         return bitmaps ;
     }
 
-//    public List<Bitmap> fourOneHorizontalThreeBox(Bitmap picture) {
-//        List<Bitmap> imgs = new ArrayList<Bitmap>();
-//        Bitmap first = Bitmap.createBitmap(picture, 0, 0, picture.getWidth(),picture.getHeight()/(picture.getHeight()/picture.getWidth()));
-//        imgs.add(first);
-//        Bitmap second= Bitmap.createBitmap(picture, 0,picture.getHeight()/(picture.getHeight()/picture.getWidth()), picture.getWidth()/3,picture.getHeight()/(picture.getHeight()/(picture.getWidth()/3)));
-//        imgs.add(second);
-//        Bitmap third= Bitmap.createBitmap(picture, picture.getWidth()/3,picture.getHeight()/(picture.getHeight()/picture.getWidth()),picture.getWidth()/3, picture.getHeight()/(picture.getHeight()/(picture.getWidth()/3)));
-//        imgs.add(third);
-//        Bitmap forth= Bitmap.createBitmap(picture, (picture.getWidth()/3)/2,picture.getHeight()/(picture.getHeight()/picture.getWidth()),picture.getWidth()/3, picture.getHeight()/(picture.getHeight()/(picture.getWidth()/3)));
-//        imgs.add(forth);
-//        return imgs;
-//    }
 
     public List<Bitmap> fourOneHorizontalThreeBox(Bitmap picture) {
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(picture, 900, 900, false);
